@@ -1,21 +1,33 @@
 import React, { FC } from 'react'
-import { Box, Typography } from '@mui/material'
+import { Box } from '@mui/material'
 
 interface Props {
   onClick?: () => void
   variant?: 'primary' | 'secondary'
+  width?: number | string
+  height?: number | string
 }
 
-const Logo: FC<Props> = ({ onClick, variant }) => {
+const Logo: FC<Props> = ({ onClick, variant, width = 140, height = 'auto' }) => {
   return (
-    <Box onClick={onClick}>
-      <Typography
-        variant="h4"
-        component="h1"
-        sx={{ fontWeight: 700, '& span': { color: variant === 'primary' ? 'primary.main' : 'unset' } }}
-      >
-        Course<span>space</span>
-      </Typography>
+    <Box
+      onClick={onClick}
+      sx={{
+        cursor: onClick ? 'pointer' : 'default',
+        display: 'inline-flex',
+        alignItems: 'center',
+      }}
+    >
+      <Box
+        component="img"
+        src="/logo.png"
+        alt="Logo"
+        sx={{
+          width,
+          height,
+          filter: variant === 'secondary' ? 'grayscale(1) opacity(0.8)' : 'none',
+        }}
+      />
     </Box>
   )
 }
